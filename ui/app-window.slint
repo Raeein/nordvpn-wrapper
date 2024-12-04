@@ -1,6 +1,81 @@
-export component MainWindow inherits Window {
-    Text {
-        text: "hello world";
-        color: green;
+import { AboutSlint, Button, VerticalBox, HorizontalBox, ComboBox, Switch, SpinBox } from "std-widgets.slint";
+
+component NordWrapper inherits Rectangle {
+    VerticalBox {
+        alignment: start;
+        Text {
+            text: "NordVPN Wrapper";
+            font-size: 20px;
+            horizontal-alignment: center;
+        }
+
+        HorizontalBox {
+            spacing: 5px;
+            Text {
+                text: "Server Selection:";
+            }
+
+            ComboBox {
+                width: 150px;
+                current-value: "Select a server";
+                model: ["USA", "Canada", "UK", "Germany", "Japan"];
+            }
+        }
+
+        HorizontalBox {
+            spacing: 5px;
+            Text {
+                text: "Status:";
+            }
+
+            Rectangle {
+                width: 10px;
+                height: 10px;
+                background: red; // Change dynamically based on connection state
+            }
+
+            Text {
+                text: "Disconnected"; // Update dynamically }
+            }
+        }
+
+        HorizontalBox {
+            spacing: 5px;
+            Text {
+                text: "Kill Switch:";
+            }
+
+            Switch {
+                text: "OFF";
+            }
+        }
+
+        HorizontalBox {
+            spacing: 10px;
+            Button {
+                text: "Connect";
+            }
+
+            Button {
+                text: "Disconnect";
+                enabled: false; // Disable initially
+                }
+        }
+
+        AboutSlint {
+            preferred-height: 20px;
+        }
     }
+}
+
+export component MainWindow inherits Window {
+    callback check_if_pair_solved(); // Added
+
+    preferred-width: 400px;
+    preferred-height: 400px;
+
+    title: "NordVPN Wrapper";
+    icon: @image-url("./icons/bus.png");
+
+    NordWrapper { }
 }
